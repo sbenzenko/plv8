@@ -19,7 +19,7 @@ Currently, Postgres requires a patch of one or more `include` files in order to
 compile PLV8.
 
 First, find the directory that contains the `include` files.  This will typically
-be inside something like `C:\Program Files\PostgreSQL\10\include`, where the `10`
+be inside something like `C:\Program Files\PostgreSQL\14\include`, where the `14`
 is your version number.  Inside of the `include` directory:
 
 ```
@@ -29,6 +29,10 @@ PS> patch < generic-msvc.h.patch
 ```
 
 ## Bootstrapping
+Open Powershell. Run the following in order to allow running unsigned powershell scripts:
+```
+PS> Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
 
 Bootstrapping will the build environment, download, and compile `v8`.  Watch for
 any errors:
@@ -44,6 +48,7 @@ specifying the path to your Postgres install, the version of Postgres you are
 running, as well as the build target.  Build targets will typically be one of the
 following:
 
+* `Visual Studio 17 2022` - MSVC 2022
 * `Visual Studio 15 2017` - 32 bit, MSVC 2017
 * `Visual Studio 15 2017 Win64` - 64 bit, MSVC 2017
 * `Visual Studio 14 2015` - 32 bit, MSVC 2015
@@ -52,7 +57,7 @@ following:
 * `Visual Studio 12 2013 Win64` - 64 bit, MSVC 2013
 
 ```
-PS> cmake . -G "Visual Studio 15 2017 Win64" -DCMAKE_INSTALL_PREFIX="C:\Program Files\PostgreSQL\10" -DPOSTGRESQL_VERSION=10
+PS> cmake . -G "Visual Studio 17 2022 Win64" -DCMAKE_INSTALL_PREFIX="C:\Program Files\PostgreSQL\14" -DPOSTGRESQL_VERSION=14
 ```
 
 ## Compiling
